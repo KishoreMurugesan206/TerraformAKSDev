@@ -9,7 +9,7 @@ resource "azurerm_active_directory_group" "aks_admins" {
 data "azuread_client_config" "current" {}
 
 resource "azuread_group" "aks_admins" {
-    display_name = "${azurerm_resource_group.aks_rg1.name}-cluster-administrators"
+    display_name = "${azurerm_resource_group.aks-rg1.id}-cluster-administrators"
     owners = [data.azuread_client_config.current.object_id]
     security_enabled = true    
 }
