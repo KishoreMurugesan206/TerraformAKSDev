@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: TerraformCLI@2
+  inputs:
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
+    backendType: 'azurerm'
+    allowTelemetryCollection: true
+    
+
+- task: TerraformCLI@2
+  inputs:
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
+    allowTelemetryCollection: true
+    
