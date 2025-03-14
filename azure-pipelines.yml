@@ -15,6 +15,10 @@ steps:
   displayName: 'Install Terraform'
   inputs:
     terraformVersion: 'latest'
+
+- script: |
+    sed "s/\${azurerm_version}/$(azurerm_version)/; s/\${random_version}/$(random_version)/" 01a-main.tf.tpl > main.tf
+  displayName: 'Generate Terraform Configuration'
 - task: TerraformCLI@2
   inputs:
     command: 'init'
