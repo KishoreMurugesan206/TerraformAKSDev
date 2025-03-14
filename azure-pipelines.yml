@@ -19,7 +19,7 @@ steps:
 - script: |
     sed "s/\${azurerm_version}/$(azurerm_version)/; s/\${random_version}/$(random_version)/" 01a-main.tf.tpl > main.tf
   displayName: 'Generate Terraform Configuration'
-- task: TerraformCLI@4
+- task: TerraformCLI@1
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
@@ -27,7 +27,7 @@ steps:
     allowTelemetryCollection: true
     
 
-- task: TerraformCLI@4
+- task: TerraformCLI@1
   inputs:
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
