@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  - group: Platform-Verisons 
+
 steps:
 
   - task: TerraformCLI@1
@@ -27,6 +30,7 @@ steps:
       sed "s/\${AZURERM}/$(AZURERM)/; s/\${RANDOM}/$(RANDOM)/" 03-TF-Create-AKS-Cluster/01a-main.tf.tpl > main.tf
     displayName: 'Generate Terraform Configuration'
   - task: TerraformCLI@1
+    displayName: 'Terraform init'
     inputs:
       command: 'init'
       workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
@@ -35,6 +39,7 @@ steps:
     
 
   - task: TerraformCLI@1
+    displayName: 'Terraform Plan'
     inputs:
       command: 'plan'
       workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
