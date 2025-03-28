@@ -13,15 +13,9 @@ variables:
   - group: Provider-Versions
 
 steps:
-
-  - task: TerraformCLI@2
-    displayName: 'Install Terraform'
+  - task: TerraformInstaller@2
     inputs:
       terraformVersion: '$(terraform)'
-
- - task: TerraformInstaller@1
-  inputs:
-    terraformVersion: '$(terraform)'
 
   - script: |
       # echo "AZUREAD_VERSION: \"$(AZUREAD)\""
