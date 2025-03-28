@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  - group: Platform-Verisons 
+  - group: Platform-Versions 
 
 steps:
 
