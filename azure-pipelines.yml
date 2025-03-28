@@ -14,6 +14,7 @@ variables:
 
 steps:
   - task: TerraformInstaller@2
+    displayName: 'Install Terraform'
     inputs:
       terraformVersion: '$(terraform)'
 
