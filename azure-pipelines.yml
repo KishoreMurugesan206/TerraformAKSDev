@@ -14,10 +14,14 @@ variables:
 
 steps:
 
-  - task: TerraformCLI@1
+  - task: TerraformCLI@2
     displayName: 'Install Terraform'
     inputs:
       terraformVersion: '$(terraform)'
+
+ - task: TerraformInstaller@1
+  inputs:
+    terraformVersion: '$(terraform)'
 
   - script: |
       # echo "AZUREAD_VERSION: \"$(AZUREAD)\""
