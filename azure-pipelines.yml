@@ -33,7 +33,7 @@ jobs:
       - script: |
           sed "s/\${AZURERM}/$(AZURERM)/; s/\${RANDOM}/$(RANDOM)/" 03-TF-Create-AKS-Cluster/01a-main.tf.tpl > main.tf
         displayName: 'Generate Terraform Configuration'
-      - task: TerraformCLI@1
+      - task: TerraformTaskV4@4
         displayName: 'Terraform init'
         inputs:
           command: 'init'
@@ -42,7 +42,7 @@ jobs:
           allowTelemetryCollection: true
         
 
-      - task: TerraformCLI@1
+      - task: TerraformTaskV4@4
         displayName: 'Terraform Plan'
         inputs:
           command: 'plan'
