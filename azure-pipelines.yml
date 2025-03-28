@@ -12,35 +12,40 @@ pool:
 variables:
   - group: Provider-Versions
 
-steps:
-  - task: TerraformInstaller@1
-    displayName: 'Install Terraform'
-    inputs:
-      terraformVersion: '$(terraform)'
+jobs:
+  - job: Terraform_Job
+    steps:
+      - task: TerraformInstaller@1
+        inputs:
+          terraformVersion: "$(terraform)"
 
-  - script: |
-      # echo "AZUREAD_VERSION: \"$(AZUREAD)\""
-      echo "AZURERM_VERSION: \"$(AZURERM)\""
-      echo "RANDOM_VERSION: \"$(RANDOM)\""
-      # echo "TIME_VERSION: \"$(TIME)\""
-    displayName: "Debug Provider Versions" 
+  # - task: TerraformInstaller@1
+  #   displayName: 'Install Terraform'
+  #   inputs:
+  #     terraformVersion: '$(terraform)'
+      - script: |
+          # echo "AZUREAD_VERSION: \"$(AZUREAD)\""
+          echo "AZURERM_VERSION: \"$(AZURERM)\""
+          echo "RANDOM_VERSION: \"$(RANDOM)\""
+          # echo "TIME_VERSION: \"$(TIME)\""
+        displayName: "Debug Provider Versions" 
 
-  - script: |
-      sed "s/\${AZURERM}/$(AZURERM)/; s/\${RANDOM}/$(RANDOM)/" 03-TF-Create-AKS-Cluster/01a-main.tf.tpl > main.tf
-    displayName: 'Generate Terraform Configuration'
-  - task: TerraformCLI@1
-    displayName: 'Terraform init'
-    inputs:
-      command: 'init'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
-      backendType: 'azurerm'
-      allowTelemetryCollection: true
-    
+      - script: |
+          sed "s/\${AZURERM}/$(AZURERM)/; s/\${RANDOM}/$(RANDOM)/" 03-TF-Create-AKS-Cluster/01a-main.tf.tpl > main.tf
+        displayName: 'Generate Terraform Configuration'
+      - task: TerraformCLI@1
+        displayName: 'Terraform init'
+        inputs:
+          command: 'init'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
+          backendType: 'azurerm'
+          allowTelemetryCollection: true
+        
 
-  - task: TerraformCLI@1
-    displayName: 'Terraform Plan'
-    inputs:
-      command: 'plan'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
-      allowTelemetryCollection: true
+      - task: TerraformCLI@1
+        displayName: 'Terraform Plan'
+        inputs:
+          command: 'plan'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
+          allowTelemetryCollection: true
     
