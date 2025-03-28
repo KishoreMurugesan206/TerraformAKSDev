@@ -24,7 +24,7 @@ steps:
     displayName: "Debug Provider Versions" 
 
   - script: |
-      sed "s/\${AZURERM}/$(AZURERM)/; s/\${RANDOM}/$(RANDOM)/" $(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster/01a-main.tf.tpl > main.tf
+      sed "s/\${AZURERM}/$(AZURERM)/; s/\${RANDOM}/$(RANDOM)/" $(System.DefaultWorkingDirectory)/01a-main.tf.tpl > main.tf
     displayName: 'Generate Terraform Configuration'
   - task: TerraformCLI@1
     inputs:
