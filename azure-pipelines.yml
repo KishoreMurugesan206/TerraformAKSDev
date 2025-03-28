@@ -13,7 +13,7 @@ variables:
   - group: Provider-Versions
 
 steps:
-  - task: TerraformInstaller@2
+  - task: TerraformInstaller@1
     displayName: 'Install Terraform'
     inputs:
       terraformVersion: '$(terraform)'
