@@ -17,7 +17,7 @@ jobs:
     steps:
       - task: TerraformInstaller@1
         inputs:
-          terraformVersion: "$(terraform)"
+          terraformVersion: '$(terraform)'
 
   # - task: TerraformInstaller@1
   #   displayName: 'Install Terraform'
