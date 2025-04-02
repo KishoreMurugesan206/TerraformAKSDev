@@ -44,7 +44,7 @@ jobs:
           backendAzureRmStorageAccountName: 'tfstateaks01'
           backendAzureRmContainerName: 'tfstatefiles'
           backendAzureRmKey: 'terraform.tfstate'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
+          # workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
         
 
       - task: TerraformTaskV4@4
@@ -52,5 +52,5 @@ jobs:
         inputs:
           provider: 'azurerm'
           command: 'plan'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
+          # workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
     
