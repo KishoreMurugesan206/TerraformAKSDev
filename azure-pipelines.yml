@@ -39,7 +39,7 @@ jobs:
         inputs:
           provider: 'azurerm'
           command: 'init'
-          backendServiceArm: 'Test-Pankaj'
+          backendServiceArm: 'az-sc-pipeline'
           backendAzureRmResourceGroupName: 'rg-pankaj-cicd'
           backendAzureRmStorageAccountName: 'testpankajtfstate'
           backendAzureRmContainerName: 'demo'
