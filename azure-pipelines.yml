@@ -41,7 +41,7 @@ jobs:
           command: 'init'
           backendServiceArm: 'az-sc-pipeline'
           backendAzureRmResourceGroupName: 'rg-kishore-test'
-          backendAzureRmStorageAccountName: 'tfstateaks01'
+          backendAzureRmStorageAccountName: 'tfstateaks02'
           backendAzureRmContainerName: 'tfstatefiles'
           backendAzureRmKey: 'terraform.tfstate'
           # workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
