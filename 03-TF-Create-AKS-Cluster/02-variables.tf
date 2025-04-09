@@ -15,6 +15,16 @@ variable "location" {
   type = string
 }
 
+variable "azurerm_version" {
+  description = "This is the location all the resource is created"
+  type = string
+}
+
+variable "random_version" {
+  description = "This is the location all the resource is created"
+  type = string
+}
+
 # Azure Resource Group Name
 variable "resource_group_name" {
   type = string
