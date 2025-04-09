@@ -18,11 +18,8 @@ jobs:
       - task: TerraformInstaller@1
         inputs:
           terraformVersion: '$(terraform)'
+        displayName: 'Install Terraform'
 
-  # - task: TerraformInstaller@1
-  #   displayName: 'Install Terraform'
-  #   inputs:
-  #     terraformVersion: '$(terraform)'
       - script: |
           # echo "AZUREAD_VERSION: \"$(AZUREAD)\""
           echo "AZURERM_VERSION: \"$(AZURERM)\""
@@ -34,6 +31,31 @@ jobs:
           sed "s/\${AZURERM}/$(AZURERM)/; s/\${RANDOM}/$(RANDOM)/" 03-TF-Create-AKS-Cluster/01a-main.tf.tpl > main.tf
         displayName: 'Generate Terraform Configuration'
 
+      
+      - task: CopyFiles@2
+        inputs:
+          sourceFolder: '$(Build.SourcesDirectory)'
+          contents: '01a-main.tf.tpl'
+          targetFolder: '$(Build.ArtifactStagingDirectory)'
+        displayName: 'Copy file to Artifact Staging Directory'  
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          pathToPublish: '$(Build.ArtifactStagingDirectory)'
+          artifactName: 'tf-config'
+          publishLocation: 'Container'
+        displayName: 'Publish Build Artifacts'  
+
+      
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          artifactName: 'tf-config'
+          downloadPath: '$(Pipeline.Workspace)/tf-config'
+        displayName: 'Download Build Artifacts'  
+    
+  
       - task: TerraformTaskV4@4
         displayName: 'Terraform init'
         inputs:
@@ -44,6 +66,7 @@ jobs:
           backendAzureRmStorageAccountName: 'tfstateaks02'
           backendAzureRmContainerName: 'tfstatefiles'
           backendAzureRmKey: 'terraform.tfstate'
+          commandOptions: '-backend-config=$(Pipeline.Workspace)/tf-config/01a-main.tf.tpl'
           # workingDirectory: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster'
         
 
