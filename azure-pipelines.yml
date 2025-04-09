@@ -35,7 +35,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           sourceFolder: '$(Build.SourcesDirectory)'
-          contents: '01a-main.tf.tpl'
+          contents: '$(System.DefaultWorkingDirectory)/TerraformAKSDev/03-TF-Create-AKS-Cluster/01a-main.tf.tpl'
           targetFolder: '$(Build.ArtifactStagingDirectory)'
         displayName: 'Copy file to Artifact Staging Directory'  
 
