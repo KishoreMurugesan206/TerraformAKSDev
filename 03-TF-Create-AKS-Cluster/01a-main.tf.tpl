@@ -2,11 +2,11 @@ terraform {
     required_providers{
         azurerm = {
             source = "hashicorp/azurerm"
-            version = "$(azurerm_version)"
+            version = "${AZURERM}"
         }
         random = {
             source = "hashicorp/random"
-            version = "$(random_version)"
+            version = "${RANDOM}"
         }
     }
     backend "azurerm" {}
